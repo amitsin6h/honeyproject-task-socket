@@ -1,26 +1,25 @@
 import socket
  
-def Main():
-    host = "127.0.0.1"
-    port = 5000
-     
-    mySocket = socket.socket()
-    mySocket.bind((host,port))
-    print "------------------------------------------"
-    print "-------------------------------------------"
-    print "Server Sucessfully Started!!"
-    print "Socket binded to %s" %(port)
-     
-    mySocket.listen(1)
-    print "Socket is listening"
-    conn, addr = mySocket.accept()
-    print ("Connection from: " + str(addr))
+def server():
+    host = socket.gethostname()
+    port = 2222
+    
+    #creating socket object
+    server_socket = socket.socket()
+   
+   #bindig host and port
+    server_socket.bind((host,port))
+    
+    #response up to 3 request    
+    server_socket.listen(3)
+   
+    client_socket, addr = server_socket.accept()
+    print ("Got connection from: " + str(addr))
 
-    data = conn.recv(1024).decode()
-    print ("Received Message: " + str(data))
+    data = client_socket.recv(1024).decode()
+    print ("Received message: " + str(data))
              
              
-    conn.close()
+    client_socket.close()
      
-if __name__ == '__main__':
-    Main()
+server()

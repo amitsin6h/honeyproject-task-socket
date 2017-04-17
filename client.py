@@ -1,18 +1,19 @@
 import socket
  
-def Main():
-        host = '127.0.0.1'
-        port = 5000
-         
-        mySocket = socket.socket()
-        mySocket.connect((host,port))
-         
-        print "------------------------------------"
-        print "------------------------------------"
+def client():
+        host = socket.gethostname()
+        port =  2222
+
+        #creating a socket object 
+        server_socket = socket.socket()
+       
+       #connecting to host on port
+        server_socket.connect((host,port))
+        
+        #get raw_input
         message = raw_input("Enter Your Message:")
-        mySocket.send(message.encode())
+        server_socket.send(message.encode())
                  
-        mySocket.close()
+        server_socket.close()
  
-if __name__ == '__main__':
-    Main()
+client()
