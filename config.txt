@@ -1,0 +1,2 @@
+about = "Configuration File for Program"
+port = 2222
